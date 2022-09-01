@@ -525,12 +525,26 @@
         }
       ]
     },
+    "let": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "let"
+      }
+    },
+    "in": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "in"
+      }
+    },
     "let_expression": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "let"
+          "type": "SYMBOL",
+          "name": "let"
         },
         {
           "type": "CHOICE",
@@ -545,8 +559,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "in"
+          "type": "SYMBOL",
+          "name": "in"
         },
         {
           "type": "FIELD",

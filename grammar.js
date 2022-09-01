@@ -109,7 +109,9 @@ module.exports = grammar({
 
     assert_expression: $ => seq('assert', field('condition', $._expression), ';', field('body', $._expr_function_expression)),
     with_expression: $ => seq('with', field('environment', $._expression), ';', field('body', $._expr_function_expression)),
-    let_expression: $ => seq('let', optional($.binding_set), 'in', field('body', $._expr_function_expression)),
+    let: $ => token('let'),
+    in: $ => token('in'),
+    let_expression: $ => seq($.let, optional($.binding_set), $.in, field('body', $._expr_function_expression)),
 
     _expr_if: $ => choice(
       $.if_expression,

@@ -1135,6 +1135,11 @@
     }
   },
   {
+    "type": "let",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "let_attrset_expression",
     "named": true,
     "fields": {},
@@ -1257,11 +1262,19 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "binding_set",
+          "named": true
+        },
+        {
+          "type": "in",
+          "named": true
+        },
+        {
+          "type": "let",
           "named": true
         }
       ]
@@ -1958,7 +1971,7 @@
   },
   {
     "type": "in",
-    "named": false
+    "named": true
   },
   {
     "type": "inherit",
