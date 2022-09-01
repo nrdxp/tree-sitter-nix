@@ -28,7 +28,8 @@ module.exports = grammar({
   ],
 
   supertypes: $ => [
-    $._expression
+    $._expression,
+    $._block
   ],
 
   inline: $ => [
@@ -49,6 +50,7 @@ module.exports = grammar({
   rules: {
     source_code: $ => optional(field('expression', $._expression)),
     _expression: $ => $._expr_function_expression,
+    _block: $ => $.block,
 
     // Keywords go before identifiers to let them take precedence when both are expected.
     // Workaround before https://github.com/tree-sitter/tree-sitter/pull/246
@@ -83,6 +85,29 @@ module.exports = grammar({
     spath_expression: $ => /<[a-zA-Z0-9\._\-\+]+(\/[a-zA-Z0-9\._\-\+]+)*>/,
     uri_expression: $ => /[a-zA-Z][a-zA-Z0-9\+\-\.]*:[a-zA-Z0-9%\/\?:@\&=\+\$,\-_\.\!\~\*\']+/,
 
+    block: $ => choice(
+      $.in_block,
+      $.let_block,
+      $.if_block,
+      $.then_block,
+      $.else_block,
+      $.binding,
+      $.attr_block,
+      $.formals,
+      $.inherit,
+      $.inherit_from,
+      $.with_expression,
+      $.assert_expression,
+      $.indented_string_expression,
+      $.binary_expression,
+      $.interpolation,
+      $.list_expression,
+      $.parenthesized_expression,
+      $.has_attr_expression,
+      $.select_expression,
+      $.apply_expression
+    ),
+
     _expr_function_expression: $ => choice(
       $.function_expression,
       $.assert_expression,
@@ -109,14 +134,21 @@ module.exports = grammar({
 
     assert_expression: $ => seq('assert', field('condition', $._expression), ';', field('body', $._expr_function_expression)),
     with_expression: $ => seq('with', field('environment', $._expression), ';', field('body', $._expr_function_expression)),
-    let_expression: $ => seq('let', optional($.binding_set), 'in', field('body', $._expr_function_expression)),
+    let_expression: $ => seq($.let_block, $.in_block),
+
+    let_block: $ => seq('let', optional($.binding_set)),
+    in_block: $ =>  seq('in', field('body', $._expr_function_expression)),
 
     _expr_if: $ => choice(
       $.if_expression,
       $._expr_op
     ),
 
-    if_expression: $ => seq('if', field('condition', $._expression), 'then', field('consequence', $._expression), 'else', field('alternative', $._expression)),
+    if_expression: $ => seq($.if_block, $.then_block, $.else_block),
+
+    if_block: $ => seq('if', field('condition', $._expression)),
+    then_block: $ => seq('then', field('consequence', $._expression)),
+    else_block: $ => seq('else', field('alternative', $._expression)),
 
     _expr_op: $ => choice(
       $.has_attr_expression,
@@ -224,6 +256,12 @@ module.exports = grammar({
     attrset_expression: $ => seq('{', optional($.binding_set), '}'),
     let_attrset_expression: $ => seq('let', '{', optional($.binding_set), '}'),
     rec_attrset_expression: $ => seq('rec', '{', optional($.binding_set), '}'),
+
+    attr_block: $ => choice(
+      $.attrset_expression,
+      $.let_attrset_expression,
+      $.rec_attrset_expression
+    ),
 
     string_expression: $ => seq(
       '"',

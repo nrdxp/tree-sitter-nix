@@ -1,5 +1,15 @@
 [
   {
+    "type": "_block",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "block",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_expression",
     "named": true,
     "subtypes": [
@@ -362,6 +372,29 @@
     }
   },
   {
+    "type": "attr_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "attrset_expression",
+          "named": true
+        },
+        {
+          "type": "let_attrset_expression",
+          "named": true
+        },
+        {
+          "type": "rec_attrset_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "attrpath",
     "named": true,
     "fields": {
@@ -687,6 +720,113 @@
     }
   },
   {
+    "type": "block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "apply_expression",
+          "named": true
+        },
+        {
+          "type": "assert_expression",
+          "named": true
+        },
+        {
+          "type": "attr_block",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "binding",
+          "named": true
+        },
+        {
+          "type": "else_block",
+          "named": true
+        },
+        {
+          "type": "formals",
+          "named": true
+        },
+        {
+          "type": "has_attr_expression",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "in_block",
+          "named": true
+        },
+        {
+          "type": "indented_string_expression",
+          "named": true
+        },
+        {
+          "type": "inherit",
+          "named": true
+        },
+        {
+          "type": "inherit_from",
+          "named": true
+        },
+        {
+          "type": "interpolation",
+          "named": true
+        },
+        {
+          "type": "let_block",
+          "named": true
+        },
+        {
+          "type": "list_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "select_expression",
+          "named": true
+        },
+        {
+          "type": "then_block",
+          "named": true
+        },
+        {
+          "type": "with_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_block",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "formal",
     "named": true,
     "fields": {
@@ -994,19 +1134,9 @@
     }
   },
   {
-    "type": "if_expression",
+    "type": "if_block",
     "named": true,
     "fields": {
-      "alternative": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      },
       "condition": {
         "multiple": false,
         "required": true,
@@ -1016,13 +1146,134 @@
             "named": true
           }
         ]
-      },
-      "consequence": {
+      }
+    }
+  },
+  {
+    "type": "if_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "else_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "then_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "in_block",
+    "named": true,
+    "fields": {
+      "body": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "_expression",
+            "type": "apply_expression",
+            "named": true
+          },
+          {
+            "type": "assert_expression",
+            "named": true
+          },
+          {
+            "type": "attrset_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "float_expression",
+            "named": true
+          },
+          {
+            "type": "function_expression",
+            "named": true
+          },
+          {
+            "type": "has_attr_expression",
+            "named": true
+          },
+          {
+            "type": "hpath_expression",
+            "named": true
+          },
+          {
+            "type": "if_expression",
+            "named": true
+          },
+          {
+            "type": "indented_string_expression",
+            "named": true
+          },
+          {
+            "type": "integer_expression",
+            "named": true
+          },
+          {
+            "type": "let_attrset_expression",
+            "named": true
+          },
+          {
+            "type": "let_expression",
+            "named": true
+          },
+          {
+            "type": "list_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "path_expression",
+            "named": true
+          },
+          {
+            "type": "rec_attrset_expression",
+            "named": true
+          },
+          {
+            "type": "select_expression",
+            "named": true
+          },
+          {
+            "type": "spath_expression",
+            "named": true
+          },
+          {
+            "type": "string_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "uri_expression",
+            "named": true
+          },
+          {
+            "type": "variable_expression",
+            "named": true
+          },
+          {
+            "type": "with_expression",
             "named": true
           }
         ]
@@ -1150,118 +1401,34 @@
     }
   },
   {
-    "type": "let_expression",
+    "type": "let_block",
     "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "apply_expression",
-            "named": true
-          },
-          {
-            "type": "assert_expression",
-            "named": true
-          },
-          {
-            "type": "attrset_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "float_expression",
-            "named": true
-          },
-          {
-            "type": "function_expression",
-            "named": true
-          },
-          {
-            "type": "has_attr_expression",
-            "named": true
-          },
-          {
-            "type": "hpath_expression",
-            "named": true
-          },
-          {
-            "type": "if_expression",
-            "named": true
-          },
-          {
-            "type": "indented_string_expression",
-            "named": true
-          },
-          {
-            "type": "integer_expression",
-            "named": true
-          },
-          {
-            "type": "let_attrset_expression",
-            "named": true
-          },
-          {
-            "type": "let_expression",
-            "named": true
-          },
-          {
-            "type": "list_expression",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "path_expression",
-            "named": true
-          },
-          {
-            "type": "rec_attrset_expression",
-            "named": true
-          },
-          {
-            "type": "select_expression",
-            "named": true
-          },
-          {
-            "type": "spath_expression",
-            "named": true
-          },
-          {
-            "type": "string_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "uri_expression",
-            "named": true
-          },
-          {
-            "type": "variable_expression",
-            "named": true
-          },
-          {
-            "type": "with_expression",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": false,
       "required": false,
       "types": [
         {
           "type": "binding_set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "let_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "in_block",
+          "named": true
+        },
+        {
+          "type": "let_block",
           "named": true
         }
       ]
@@ -1570,6 +1737,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "then_block",
+    "named": true,
+    "fields": {
+      "consequence": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

@@ -22,6 +22,10 @@
       "type": "SYMBOL",
       "name": "_expr_function_expression"
     },
+    "_block": {
+      "type": "SYMBOL",
+      "name": "block"
+    },
     "keyword": {
       "type": "PATTERN",
       "value": "if|then|else|let|inherit|in|rec|with|assert"
@@ -127,6 +131,91 @@
     "uri_expression": {
       "type": "PATTERN",
       "value": "[a-zA-Z][a-zA-Z0-9\\+\\-\\.]*:[a-zA-Z0-9%\\/\\?:@\\&=\\+\\$,\\-_\\.\\!\\~\\*\\']+"
+    },
+    "block": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "in_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "let_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "if_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "then_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "else_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binding"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attr_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "formals"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inherit"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inherit_from"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "with_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "assert_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "indented_string_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "interpolation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "has_attr_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "select_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "apply_expression"
+        }
+      ]
     },
     "_expr_function_expression": {
       "type": "CHOICE",
@@ -529,6 +618,19 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "let_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "in_block"
+        }
+      ]
+    },
+    "let_block": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": "let"
         },
@@ -543,7 +645,12 @@
               "type": "BLANK"
             }
           ]
-        },
+        }
+      ]
+    },
+    "in_block": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": "in"
@@ -575,6 +682,23 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "if_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "then_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "else_block"
+        }
+      ]
+    },
+    "if_block": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
           "value": "if"
         },
@@ -585,7 +709,12 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
-        },
+        }
+      ]
+    },
+    "then_block": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": "then"
@@ -597,7 +726,12 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
-        },
+        }
+      ]
+    },
+    "else_block": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "STRING",
           "value": "else"
@@ -1500,6 +1634,23 @@
         }
       ]
     },
+    "attr_block": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "attrset_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "let_attrset_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rec_attrset_expression"
+        }
+      ]
+    },
     "string_expression": {
       "type": "SEQ",
       "members": [
@@ -1924,7 +2075,8 @@
   ],
   "inline": [],
   "supertypes": [
-    "_expression"
+    "_expression",
+    "_block"
   ]
 }
 
