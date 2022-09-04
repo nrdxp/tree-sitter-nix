@@ -70,6 +70,7 @@ static bool scan_indented_string_fragment(TSLexer *lexer) {
         if (lexer->lookahead == '\'') {
           // Two single quotes always stop current string fragment.
           // It can be either an end delimiter '', or escape sequences ''', ''$, ''\<any>
+          lexer->mark_end(lexer);
           return has_content;
         }
         break;
