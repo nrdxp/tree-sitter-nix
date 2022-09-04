@@ -1536,8 +1536,26 @@
     "escape_sequence": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "\\\\(.|\\s)"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "."
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s"
+              }
+            ]
+          }
+        ]
       }
     },
     "indented_string_expression": {
@@ -1586,8 +1604,30 @@
     "_indented_escape_sequence": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "'''|''\\$|''\\\\(.|\\s)"
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "''"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "'"
+              },
+              {
+                "type": "STRING",
+                "value": "$"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\(.|\\s)"
+              }
+            ]
+          }
+        ]
       }
     },
     "binding_set": {

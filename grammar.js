@@ -234,7 +234,10 @@ module.exports = grammar({
       )),
       '"'
     ),
-    escape_sequence: $ => token.immediate(/\\(.|\s)/), // Can also escape newline.
+    escape_sequence: $ => token.immediate(
+      seq('\\',
+        choice(/./, /\s/) // Can also escape newline.
+    )),
 
     indented_string_expression: $ => seq(
       "''",
@@ -245,7 +248,10 @@ module.exports = grammar({
       )),
       "''"
     ),
-    _indented_escape_sequence: $ => token.immediate(/'''|''\$|''\\(.|\s)/), // Can also escape newline.
+    _indented_escape_sequence: $ => token.immediate(
+      seq("''",
+        choice("'", "$", /\\(.|\s)/)
+    )), // Can also escape newline.
 
     binding_set: $ => repeat1(field('binding', choice($.binding, $.inherit, $.inherit_from))),
     binding: $ => seq(field('attrpath', $.attrpath), '=', field('expression', $._expression), ';'),
