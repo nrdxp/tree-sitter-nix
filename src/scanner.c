@@ -82,6 +82,20 @@ static bool scan_string_fragment(TSLexer *lexer) {
 // See comments of scan_string_fragment.
 static bool scan_indented_string_fragment(TSLexer *lexer) {
   lexer->result_symbol = INDENTED_STRING_FRAGMENT;
+  lexer->mark_end(lexer);
+
+  int32_t c = lexer->lookahead;
+  while (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+    advance(lexer);
+    c = lexer->lookahead;
+  }
+
+  if (lexer->lookahead == '#') {
+    advance(lexer);
+    if (lexer->lookahead == '!') {
+      return false;
+    }
+  }
   for (bool has_content = false;; has_content = true) {
     lexer->mark_end(lexer);
     switch (lexer->lookahead) {

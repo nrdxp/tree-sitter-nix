@@ -1563,12 +1563,28 @@
         "value": "\\\\([^$]|\\s)"
       }
     },
+    "shebang": {
+      "type": "PATTERN",
+      "value": "#![^\\r\\n]*"
+    },
     "indented_string_expression": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
           "value": "''"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "shebang"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "REPEAT",

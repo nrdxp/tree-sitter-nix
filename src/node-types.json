@@ -1050,6 +1050,10 @@
           "named": true
         },
         {
+          "type": "shebang",
+          "named": true
+        },
+        {
           "type": "string_fragment",
           "named": true
         }
@@ -1995,6 +1999,10 @@
   {
     "type": "rec",
     "named": false
+  },
+  {
+    "type": "shebang",
+    "named": true
   },
   {
     "type": "spath_expression",

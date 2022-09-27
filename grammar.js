@@ -241,8 +241,11 @@ module.exports = grammar({
 
     escape_sequence: $ => token.immediate(/\\([^$]|\s)/), // Can also escape newline.
 
+    shebang: $ => /#![^\r\n]*/,
+
     indented_string_expression: $ => seq(
       "''",
+      optional($.shebang),
       repeat(choice(
         alias($._indented_string_fragment, $.string_fragment),
         $.interpolation,
